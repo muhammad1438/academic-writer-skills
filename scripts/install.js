@@ -125,7 +125,9 @@ Examples:
 
 function installSkill(skillName, targetDir, dryRun) {
   const skillSrc = path.join(SKILLS_DIR, skillName, 'SKILL.md');
-  const skillDest = path.join(targetDir, `academic-writer-${skillName}.md`);
+  const installedDirName = `AW-${skillName}`;
+  const skillDestDir = path.join(targetDir, installedDirName);
+  const skillDest = path.join(skillDestDir, 'SKILL.md');
 
   if (!fs.existsSync(skillSrc)) {
     console.warn(`  ⚠ Skill not found: ${skillName} (${skillSrc})`);
@@ -133,13 +135,18 @@ function installSkill(skillName, targetDir, dryRun) {
   }
 
   if (dryRun) {
-    console.log(`  [dry-run] Would copy: ${skillName} → ${skillDest}`);
+    console.log(`  [dry-run] Would create: ${skillDestDir}/SKILL.md (name: ${installedDirName})`);
     return true;
   }
 
-  fs.mkdirSync(targetDir, { recursive: true });
-  fs.copyFileSync(skillSrc, skillDest);
-  console.log(`  ✓ Installed: ${skillName}`);
+  fs.mkdirSync(skillDestDir, { recursive: true });
+
+  // Copy content and rewrite the name: field to match the install directory name
+  let content = fs.readFileSync(skillSrc, 'utf8');
+  content = content.replace(/^(name:\s*)[\w-]+/m, `$1${installedDirName}`);
+  fs.writeFileSync(skillDest, content, 'utf8');
+
+  console.log(`  ✓ Installed: ${installedDirName}/SKILL.md`);
   return true;
 }
 
