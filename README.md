@@ -169,6 +169,13 @@ See [CLAUDE.md](CLAUDE.md) for the full contribution guide, skill format specifi
 
 See [CHANGELOG.md](CHANGELOG.md) for full release history.
 
+## Built With
+
+This plugin was developed with the assistance of:
+
+- [Claude Code](https://claude.ai/claude-code) (Anthropic) — AI coding assistant used for skill authoring and plugin architecture
+- [GLM-5](https://zhipuai.cn) (Zhipu AI) — AI model used in research and content development
+
 ## License
 
 MIT — see [LICENSE](LICENSE)
