@@ -1,0 +1,67 @@
+{
+  "version": "1.3.0",
+  "modules": {
+    "core-writing": {
+      "description": "Essential academic writing foundations",
+      "skills": [
+        "academic-writing-core",
+        "paper-structure",
+        "grammar-style-checker",
+        "academic-language-toolkit",
+        "paraphrasing-engine"
+      ]
+    },
+    "citations": {
+      "description": "Citation formatting and reference management",
+      "skills": [
+        "citation-formatter",
+        "reference-verifier"
+      ]
+    },
+    "grants": {
+      "description": "Grant and funding applications",
+      "skills": [
+        "grant-proposal",
+        "data-management-plan",
+        "cover-letter-writer"
+      ]
+    },
+    "statistics": {
+      "description": "Statistical and quantitative reporting",
+      "skills": [
+        "statistical-reporting",
+        "figure-table-checker",
+        "lab-report"
+      ]
+    },
+    "publication": {
+      "description": "Publication and journal submission workflow",
+      "skills": [
+        "journal-selection",
+        "peer-review-response",
+        "abstract-writer",
+        "plain-language-summary"
+      ]
+    },
+    "qualitative": {
+      "description": "Qualitative research methods and reporting",
+      "skills": [
+        "qualitative-reporting",
+        "argumentation-engine"
+      ]
+    },
+    "specialized": {
+      "description": "Specialized academic writing contexts",
+      "skills": [
+        "thesis-dissertation-guide",
+        "research-proposal",
+        "literature-review",
+        "preregistration-guide",
+        "conference-presentation",
+        "academic-cv",
+        "latex-writer",
+        "ai-academic-ethics"
+      ]
+    }
+  }
+}

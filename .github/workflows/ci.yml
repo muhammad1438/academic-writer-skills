@@ -1,0 +1,153 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+
+      - name: Run markdownlint
+        run: markdownlint '**/*.md' --ignore node_modules --ignore '.github/**'
+        continue-on-error: true  # Don't fail CI on lint warnings initially
+
+  validate-plugin:
+    name: Validate Plugin Manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate plugin.json is valid JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json', 'utf8')); console.log('plugin.json: valid JSON');"
+
+      - name: Validate marketplace.json is valid JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json', 'utf8')); console.log('marketplace.json: valid JSON');"
+
+      - name: Check plugin.json and marketplace.json are identical
+        run: |
+          plugin=$(node -e "const f=require('fs'); console.log(JSON.stringify(JSON.parse(f.readFileSync('.claude-plugin/plugin.json','utf8'))))")
+          marketplace=$(node -e "const f=require('fs'); console.log(JSON.stringify(JSON.parse(f.readFileSync('.claude-plugin/marketplace.json','utf8'))))")
+          if [ "$plugin" = "$marketplace" ]; then
+            echo "✅ plugin.json and marketplace.json are identical"
+          else
+            echo "❌ plugin.json and marketplace.json differ!"
+            exit 1
+          fi
+
+  validate-skill-paths:
+    name: Validate Skill Paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check all skill paths in plugin.json exist
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const plugin = JSON.parse(fs.readFileSync('.claude-plugin/plugin.json', 'utf8'));
+          let failed = 0;
+          let passed = 0;
+          for (const skill of plugin.skills) {
+            if (!skill.path) {
+              console.warn('⚠ Skill ' + skill.name + ' has no path field');
+              continue;
+            }
+            if (fs.existsSync(skill.path)) {
+              console.log('✅ ' + skill.name + ': ' + skill.path);
+              passed++;
+            } else {
+              console.error('❌ MISSING: ' + skill.name + ' → ' + skill.path);
+              failed++;
+            }
+          }
+          console.log('');
+          console.log('Results: ' + passed + ' found, ' + failed + ' missing');
+          if (failed > 0) process.exit(1);
+          "
+
+  check-no-artifacts:
+    name: Check No Artifact Files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for log files
+        run: |
+          if find . -name "*.log" -not -path "./.git/*" | grep -q .; then
+            echo "❌ Found .log files that should not be committed:"
+            find . -name "*.log" -not -path "./.git/*"
+            exit 1
+          else
+            echo "✅ No .log files found"
+          fi
+
+      - name: Check for zip files
+        run: |
+          if find . -name "*.zip" -not -path "./.git/*" | grep -q .; then
+            echo "❌ Found .zip files that should not be committed:"
+            find . -name "*.zip" -not -path "./.git/*"
+            exit 1
+          else
+            echo "✅ No .zip files found"
+          fi
+
+  validate-manifests:
+    name: Validate Install Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate manifest JSON files
+        run: |
+          for f in manifests/*.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f', 'utf8')); console.log('✅ $f: valid JSON');"
+          done
+
+      - name: Check all profile skills exist in skills directory
+        run: |
+          node -e "
+          const fs = require('fs');
+          const profiles = JSON.parse(fs.readFileSync('manifests/install-profiles.json', 'utf8'));
+          let failed = 0;
+          for (const [profileName, profile] of Object.entries(profiles.profiles)) {
+            for (const skill of profile.skills) {
+              const skillPath = 'skills/' + skill + '/SKILL.md';
+              if (!fs.existsSync(skillPath)) {
+                console.error('❌ Profile ' + profileName + ': missing skill ' + skill);
+                failed++;
+              }
+            }
+          }
+          if (failed === 0) console.log('✅ All profile skills exist');
+          else process.exit(1);
+          "

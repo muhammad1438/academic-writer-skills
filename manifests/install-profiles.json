@@ -1,0 +1,67 @@
+{
+  "version": "1.3.0",
+  "profiles": {
+    "core": {
+      "description": "5 essential skills for any academic writer",
+      "skills": [
+        "academic-writing-core",
+        "grammar-style-checker",
+        "citation-formatter",
+        "paper-structure",
+        "abstract-writer"
+      ]
+    },
+    "researcher": {
+      "description": "Default 15-skill set for active researchers",
+      "skills": [
+        "academic-writing-core",
+        "paper-structure",
+        "grammar-style-checker",
+        "academic-language-toolkit",
+        "paraphrasing-engine",
+        "citation-formatter",
+        "reference-verifier",
+        "literature-review",
+        "argumentation-engine",
+        "abstract-writer",
+        "statistical-reporting",
+        "peer-review-response",
+        "journal-selection",
+        "grant-proposal",
+        "ai-academic-ethics"
+      ]
+    },
+    "full": {
+      "description": "All 27 skills for power users",
+      "skills": [
+        "academic-writing-core",
+        "abstract-writer",
+        "academic-language-toolkit",
+        "ai-academic-ethics",
+        "argumentation-engine",
+        "citation-formatter",
+        "grammar-style-checker",
+        "literature-review",
+        "paper-structure",
+        "paraphrasing-engine",
+        "grant-proposal",
+        "research-proposal",
+        "lab-report",
+        "peer-review-response",
+        "statistical-reporting",
+        "latex-writer",
+        "figure-table-checker",
+        "journal-selection",
+        "reference-verifier",
+        "data-management-plan",
+        "cover-letter-writer",
+        "qualitative-reporting",
+        "thesis-dissertation-guide",
+        "plain-language-summary",
+        "preregistration-guide",
+        "conference-presentation",
+        "academic-cv"
+      ]
+    }
+  }
+}

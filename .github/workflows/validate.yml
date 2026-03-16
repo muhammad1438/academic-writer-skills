@@ -1,0 +1,97 @@
+name: Validate Skills
+
+on:
+  push:
+    paths:
+      - 'skills/**'
+      - '.claude-plugin/**'
+      - 'manifests/**'
+  pull_request:
+    paths:
+      - 'skills/**'
+      - '.claude-plugin/**'
+      - 'manifests/**'
+  workflow_dispatch:
+
+jobs:
+  validate-all-skills:
+    name: Validate All 27 Skill Paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate all skill paths resolve to real files
+        run: |
+          node -e "
+          const fs = require('fs');
+          const plugin = JSON.parse(fs.readFileSync('.claude-plugin/plugin.json', 'utf8'));
+          const expected = 27;
+          let found = 0;
+          let failed = 0;
+
+          console.log('Checking ' + plugin.skills.length + ' skills in plugin.json...\n');
+
+          for (const skill of plugin.skills) {
+            const skillPath = skill.path || ('skills/' + skill.name + '/SKILL.md');
+            if (fs.existsSync(skillPath)) {
+              const content = fs.readFileSync(skillPath, 'utf8');
+              const lines = content.split('\n').length;
+              console.log('✅ ' + skill.name.padEnd(30) + skillPath + ' (' + lines + ' lines)');
+              found++;
+            } else {
+              console.error('❌ MISSING: ' + skill.name + ' → ' + skillPath);
+              failed++;
+            }
+          }
+
+          console.log('\n--- Summary ---');
+          console.log('Found: ' + found + '/' + plugin.skills.length);
+          console.log('Missing: ' + failed);
+          console.log('Expected: ' + expected);
+
+          if (found !== expected) {
+            console.error('❌ Expected ' + expected + ' skills but found ' + found);
+            process.exit(1);
+          }
+          if (failed > 0) {
+            console.error('❌ ' + failed + ' skill(s) missing');
+            process.exit(1);
+          }
+          console.log('\n✅ All ' + found + ' skills validated successfully');
+          "
+
+      - name: Check skill content quality
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const skillsDir = 'skills';
+          const dirs = fs.readdirSync(skillsDir);
+          let warnings = 0;
+
+          for (const dir of dirs) {
+            const skillPath = path.join(skillsDir, dir, 'SKILL.md');
+            if (!fs.existsSync(skillPath)) {
+              console.warn('⚠ No SKILL.md in skills/' + dir);
+              warnings++;
+              continue;
+            }
+            const content = fs.readFileSync(skillPath, 'utf8');
+            const lines = content.split('\n').length;
+            if (lines < 100) {
+              console.warn('⚠ skills/' + dir + '/SKILL.md is short (' + lines + ' lines) — consider expanding');
+              warnings++;
+            }
+          }
+
+          if (warnings === 0) {
+            console.log('✅ All skills pass quality checks');
+          } else {
+            console.log('\n' + warnings + ' warning(s) found (not failing CI)');
+          }
+          "

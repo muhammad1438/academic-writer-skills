@@ -1,0 +1,93 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Check version sync
+        run: |
+          TAG_VERSION="${{ steps.version.outputs.VERSION }}"
+          PKG_VERSION=$(node -e "console.log(require('./package.json').version)")
+          PLUGIN_VERSION=$(node -e "console.log(require('./.claude-plugin/plugin.json').version)")
+
+          echo "Tag version: $TAG_VERSION"
+          echo "package.json version: $PKG_VERSION"
+          echo "plugin.json version: $PLUGIN_VERSION"
+
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "❌ Tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)"
+            exit 1
+          fi
+
+          if [ "$TAG_VERSION" != "$PLUGIN_VERSION" ]; then
+            echo "❌ Tag version ($TAG_VERSION) does not match plugin.json version ($PLUGIN_VERSION)"
+            exit 1
+          fi
+
+          echo "✅ All versions are in sync: $TAG_VERSION"
+
+      - name: Count skills
+        id: skill_count
+        run: |
+          COUNT=$(find skills -name "SKILL.md" | wc -l | tr -d ' ')
+          echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Academic Writer Skills v${{ steps.version.outputs.VERSION }}
+          body: |
+            ## Academic Writer Skills v${{ steps.version.outputs.VERSION }}
+
+            ${{ steps.skill_count.outputs.COUNT }} specialist skills covering the complete academic writing lifecycle.
+
+            ### Supported Tools
+            - Claude Code (>=1.0.0)
+            - Gemini CLI (>=2.0)
+            - Cursor IDE (>=0.40)
+
+            ### Installation
+
+            **Claude Code:**
+            ```bash
+            claude plugin install academic-writer
+            ```
+
+            **Gemini CLI:**
+            ```bash
+            gemini -p @GEMINI.md "Your academic writing task"
+            ```
+
+            **Bash installer:**
+            ```bash
+            ./install.sh --profile=researcher
+            ```
+
+            ### What's Changed
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for full release notes.
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

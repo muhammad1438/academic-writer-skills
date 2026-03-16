@@ -1,0 +1,265 @@
+{
+  "name": "academic-writer",
+  "version": "1.4.0",
+  "displayName": "Academic Writer",
+  "tagline": "27 specialist skills covering the complete academic writing lifecycle",
+  "description": "A comprehensive academic writing plugin for Claude Code. Covers every stage of the scholarly writing process: planning paper structure, conducting literature reviews, building arguments, formatting citations in 9 styles, writing abstracts, polishing language and grammar, handling AI ethics disclosures, writing grant proposals (NIH, NSF, EU Horizon, ERC), preparing research proposals, writing lab reports, responding to peer review, reporting statistics (APA 7th, effect sizes, Bayesian), writing LaTeX documents, checking figure and table compliance, selecting journals and detecting predatory publishers, verifying reference accuracy, writing funder-compliant data management plans, crafting journal submission cover letters, reporting qualitative research, writing theses and dissertations, creating plain-language summaries, preregistering research studies, designing conference presentations and posters, and preparing academic CVs and job applications. Suitable for students, researchers, academics, and grant writers across all disciplines.",
+  "category": "education",
+  "subcategory": "academic-writing",
+  "tags": [
+    "academic writing",
+    "research",
+    "essay",
+    "dissertation",
+    "thesis",
+    "grant writing",
+    "citations",
+    "APA",
+    "MLA",
+    "Chicago",
+    "IEEE",
+    "Vancouver",
+    "Harvard",
+    "literature review",
+    "peer review",
+    "lab report",
+    "STEM",
+    "humanities",
+    "social sciences",
+    "medicine",
+    "engineering",
+    "NIH",
+    "NSF",
+    "EU Horizon",
+    "statistics",
+    "effect size",
+    "LaTeX",
+    "BibTeX",
+    "figures",
+    "tables",
+    "journal selection",
+    "predatory journals",
+    "reference verification",
+    "data management plan",
+    "FAIR data",
+    "open access",
+    "cover letter",
+    "qualitative research",
+    "COREQ",
+    "preregistration",
+    "registered reports",
+    "plain language",
+    "conference poster",
+    "presentation",
+    "academic CV",
+    "research statement",
+    "teaching philosophy",
+    "job application"
+  ],
+  "disciplines": [
+    "STEM",
+    "Social Sciences",
+    "Humanities",
+    "Medicine",
+    "Engineering",
+    "Business",
+    "Law",
+    "Education"
+  ],
+  "skills": [
+    {
+      "name": "academic-writing-core",
+      "displayName": "Academic Writing Core",
+      "description": "Master orchestrator — routes to specialist skills; applies discipline-specific conventions",
+      "triggers": ["write my paper", "help me with my essay", "make this more academic"],
+      "path": "skills/academic-writing-core/SKILL.md"
+    },
+    {
+      "name": "abstract-writer",
+      "displayName": "Abstract Writer",
+      "description": "Write and improve academic abstracts for journals, dissertations, and conferences",
+      "triggers": ["write an abstract", "improve my abstract", "structured abstract"],
+      "path": "skills/abstract-writer/SKILL.md"
+    },
+    {
+      "name": "academic-language-toolkit",
+      "displayName": "Academic Language Toolkit",
+      "description": "Hedging language, reporting verbs, transitions, nominalization, AWL vocabulary",
+      "triggers": ["make this more academic", "add hedging", "academic vocabulary"],
+      "path": "skills/academic-language-toolkit/SKILL.md"
+    },
+    {
+      "name": "ai-academic-ethics",
+      "displayName": "AI Academic Ethics",
+      "description": "Ethical AI use, disclosure requirements, citation of AI, detection tools, institutional policies",
+      "triggers": ["can I use ChatGPT", "disclose AI use", "AI in my paper"],
+      "path": "skills/ai-academic-ethics/SKILL.md"
+    },
+    {
+      "name": "argumentation-engine",
+      "displayName": "Argumentation Engine",
+      "description": "Toulmin, Rogerian, Classical models; thesis construction; fallacies; counterargument",
+      "triggers": ["help me build my argument", "Toulmin model", "write a counterargument"],
+      "path": "skills/argumentation-engine/SKILL.md"
+    },
+    {
+      "name": "citation-formatter",
+      "displayName": "Citation Formatter",
+      "description": "Generate and fix citations in APA, MLA, Chicago, IEEE, Vancouver, Harvard, ACS, CSE",
+      "triggers": ["cite this in APA", "format my references", "fix my bibliography"],
+      "path": "skills/citation-formatter/SKILL.md"
+    },
+    {
+      "name": "grammar-style-checker",
+      "displayName": "Grammar & Style Checker",
+      "description": "Voice, tense, parallel structure, pronoun reference, punctuation, wordiness reduction",
+      "triggers": ["proofread this", "fix the grammar", "is this too informal"],
+      "path": "skills/grammar-style-checker/SKILL.md"
+    },
+    {
+      "name": "literature-review",
+      "displayName": "Literature Review",
+      "description": "Narrative and systematic reviews, PRISMA, synthesis vs. summary, research gaps",
+      "triggers": ["write a literature review", "synthesise my sources", "systematic review"],
+      "path": "skills/literature-review/SKILL.md"
+    },
+    {
+      "name": "paper-structure",
+      "displayName": "Paper Structure",
+      "description": "IMRaD, dissertations, essays, case studies, technical reports, policy briefs",
+      "triggers": ["structure my paper", "what sections does a research paper need", "outline my dissertation"],
+      "path": "skills/paper-structure/SKILL.md"
+    },
+    {
+      "name": "paraphrasing-engine",
+      "displayName": "Paraphrasing Engine",
+      "description": "Paraphrase, summarise, quote correctly; avoid plagiarism and patchwriting",
+      "triggers": ["paraphrase this", "rewrite in my own words", "is this plagiarism"],
+      "path": "skills/paraphrasing-engine/SKILL.md"
+    },
+    {
+      "name": "grant-proposal",
+      "displayName": "Grant Proposal",
+      "description": "NIH, NSF, EU Horizon, ERC, Wellcome, UKRI; Specific Aims; Broader Impacts; budget justification",
+      "triggers": ["write my specific aims page", "NSF proposal", "grant application"],
+      "path": "skills/grant-proposal/SKILL.md"
+    },
+    {
+      "name": "research-proposal",
+      "displayName": "Research Proposal",
+      "description": "PhD proposals, ethics submissions, research questions, theoretical frameworks, Gantt charts",
+      "triggers": ["write my PhD research proposal", "ethics submission", "research question"],
+      "path": "skills/research-proposal/SKILL.md"
+    },
+    {
+      "name": "lab-report",
+      "displayName": "Lab Report",
+      "description": "Full lab report structure for all sciences; statistical reporting; figure/table formatting",
+      "triggers": ["write my lab report", "methods section", "results section", "APA statistics"],
+      "path": "skills/lab-report/SKILL.md"
+    },
+    {
+      "name": "peer-review-response",
+      "displayName": "Peer Review Response",
+      "description": "Rebuttal letters, point-by-point responses, handling contradictory reviewers, appeals",
+      "triggers": ["respond to reviewers", "rebuttal letter", "reviewer 2"],
+      "path": "skills/peer-review-response/SKILL.md"
+    },
+    {
+      "name": "statistical-reporting",
+      "displayName": "Statistical Reporting",
+      "description": "APA 7th statistical formats (t, F, r, χ²), effect sizes (Cohen's d, η², r), power analysis, Bayesian reporting, CONSORT/STROBE/PRISMA guidelines",
+      "triggers": ["report my statistics", "how do I report a t-test", "effect size", "APA statistics format", "Bayesian reporting"],
+      "path": "skills/statistical-reporting/SKILL.md"
+    },
+    {
+      "name": "latex-writer",
+      "displayName": "LaTeX Writer",
+      "description": "Document classes, essential packages, BibLaTeX/BibTeX bibliography management, equation formatting, figures and tables in LaTeX, journal templates, error fixes",
+      "triggers": ["write in LaTeX", "LaTeX document", "BibTeX", "equation in LaTeX", "which LaTeX packages", "overfull hbox"],
+      "path": "skills/latex-writer/SKILL.md"
+    },
+    {
+      "name": "figure-table-checker",
+      "displayName": "Figure & Table Checker",
+      "description": "APA and journal-specific figure/table compliance, error bar selection, colorblind-accessible palettes, CONSORT/PRISMA flow diagrams, common figure mistakes",
+      "triggers": ["check my figures", "error bars", "colorblind palette", "APA table format", "PRISMA diagram", "figure caption"],
+      "path": "skills/figure-table-checker/SKILL.md"
+    },
+    {
+      "name": "journal-selection",
+      "displayName": "Journal Selection",
+      "description": "Journal metrics (IF, CiteScore, SJR), open access models, predatory journal detection (THINK.CHECK.SUBMIT), journal matching workflow, scope assessment, resubmission strategy",
+      "triggers": ["which journal should I submit to", "is this journal predatory", "impact factor", "open access", "journal scope", "where to publish"],
+      "path": "skills/journal-selection/SKILL.md"
+    },
+    {
+      "name": "reference-verifier",
+      "displayName": "Reference Verifier",
+      "description": "DOI verification via CrossRef, retraction checking via RetractionWatch, AI-hallucinated citation detection, PubPeer integrity checks, pre-submission reference audit",
+      "triggers": ["check my references", "is this citation real", "find the DOI", "retracted paper", "AI made up a citation", "verify bibliography"],
+      "path": "skills/reference-verifier/SKILL.md"
+    },
+    {
+      "name": "data-management-plan",
+      "displayName": "Data Management Plan",
+      "description": "NIH DMS Policy, NSF DMP, UKRI, EU Horizon Europe requirements; FAIR principles; repository selection (Zenodo, Dryad, OSF); metadata standards; sensitive data handling",
+      "triggers": ["write a data management plan", "NIH data sharing", "FAIR data", "which repository", "DMP template", "EU Horizon data plan"],
+      "path": "skills/data-management-plan/SKILL.md"
+    },
+    {
+      "name": "cover-letter-writer",
+      "displayName": "Cover Letter Writer",
+      "description": "Journal submission cover letters, presubmission inquiries, letter to editor format, reviewer suggestions, ethics declarations",
+      "triggers": ["write my cover letter", "cover letter for journal submission", "presubmission inquiry", "letter to the editor"],
+      "path": "skills/cover-letter-writer/SKILL.md"
+    },
+    {
+      "name": "qualitative-reporting",
+      "displayName": "Qualitative Reporting",
+      "description": "COREQ, SRQR guidelines; thematic analysis, grounded theory, phenomenology; reflexivity statements; trustworthiness; qualitative sampling and saturation",
+      "triggers": ["write my qualitative methods", "how to report thematic analysis", "COREQ checklist", "qualitative research write-up"],
+      "path": "skills/qualitative-reporting/SKILL.md"
+    },
+    {
+      "name": "thesis-dissertation-guide",
+      "displayName": "Thesis & Dissertation Guide",
+      "description": "PhD and master's thesis structure, chapter organisation, examiner expectations, viva preparation, country-specific requirements",
+      "triggers": ["help me structure my thesis", "dissertation chapter outline", "PhD thesis structure", "viva preparation"],
+      "path": "skills/thesis-dissertation-guide/SKILL.md"
+    },
+    {
+      "name": "plain-language-summary",
+      "displayName": "Plain-Language Summary",
+      "description": "Lay summaries, plain-language abstracts, funder-mandated summaries (Wellcome, NIHR, EU Horizon), patient summaries, press releases, policy briefs",
+      "triggers": ["write a lay summary", "plain language abstract", "patient summary", "explain my research to the public"],
+      "path": "skills/plain-language-summary/SKILL.md"
+    },
+    {
+      "name": "preregistration-guide",
+      "displayName": "Preregistration Guide",
+      "description": "OSF, AsPredicted, PROSPERO registration; registered reports; hypothesis registration; pre-analysis plans; clinical trial registration",
+      "triggers": ["preregister my study", "how to write a preregistration", "OSF preregistration", "AsPredicted", "registered reports"],
+      "path": "skills/preregistration-guide/SKILL.md"
+    },
+    {
+      "name": "conference-presentation",
+      "displayName": "Conference Presentation",
+      "description": "Research posters, oral presentations, slide design, conference abstracts; LaTeX beamer and beamerposter; Q&A preparation",
+      "triggers": ["design my conference poster", "help me make slides", "write my conference abstract", "prepare my presentation", "convert paper to poster"],
+      "path": "skills/conference-presentation/SKILL.md"
+    },
+    {
+      "name": "academic-cv",
+      "displayName": "Academic CV",
+      "description": "Academic CVs, research statements, teaching philosophies, diversity statements, cover letters for faculty positions, tenure dossiers",
+      "triggers": ["write my academic CV", "help me with my research statement", "teaching philosophy", "academic cover letter", "faculty job application"],
+      "path": "skills/academic-cv/SKILL.md"
+    }
+  ],
+  "compatibility": {
+    "claudeCode": ">=1.0.0",
+    "gemini": ">=2.0",
+    "cursor": ">=0.40"
+  }
+}

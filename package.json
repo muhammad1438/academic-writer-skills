@@ -1,0 +1,37 @@
+{
+  "name": "academic-writer-skills",
+  "version": "1.4.0",
+  "description": "27 specialist academic writing skills for Claude Code, Gemini CLI, and Cursor IDE",
+  "license": "MIT",
+  "keywords": [
+    "academic-writing",
+    "claude-code",
+    "gemini",
+    "cursor",
+    "research",
+    "latex",
+    "citations",
+    "grant-writing",
+    "dissertation",
+    "thesis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muhammad1438/academic-writer-skills"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "install-skills": "node scripts/install.js",
+    "plan": "node scripts/install-plan.js",
+    "validate": "node scripts/validate.js"
+  },
+  "files": [
+    "skills/",
+    "manifests/",
+    "contexts/",
+    "install.sh",
+    "scripts/"
+  ]
+}
